@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanSprout — Навигатор по проекту</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0B0F17',
+                            card: '#1F2937',
+                            border: '#374151',
+                            accent: '#10B981',
+                            accentHover: '#059669',
+                            textMuted: '#9CA3AF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B0F17;
+            color: #F3F4F6;
+        }
+        .glass-card {
+            background: rgba(31, 41, 55, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glow-accent {
+            box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.25);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col justify-between selection:bg-brand-accent selection:text-white relative overflow-x-hidden">
+
+    <!-- Ambient Glow Effects -->
+    <div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <main class="w-full max-w-md mx-auto px-4 py-12 relative z-10 flex-grow flex flex-col justify-center">
+        
+        <!-- Header / Profile Section -->
+        <div class="text-center space-y-4 mb-8">
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-brand-accent text-brand-dark text-4xl font-extrabold shadow-xl shadow-emerald-500/20 glow-accent transform hover:scale-105 transition-transform duration-300">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+            
+            <div>
+                <h1 class="text-2xl font-extrabold text-white tracking-tight flex items-center justify-center gap-2">
+                    UrbanSprout <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-semibold border border-emerald-500/30">IoT</span>
+                </h1>
+                <p class="text-xs text-gray-400 font-medium mt-1">Автономные гидропонные IoT-шкафы & Разработка B2B</p>
+            </div>
+
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 text-[11px] font-semibold">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Все материалы проекта в одном месте
+            </div>
+        </div>
+
+        <!-- Buttons Grid Section -->
+        <div class="space-y-3.5">
+
+            <!-- 1. Сайт -->
+            <a href="index.html" target="_blank" class="glass-card group w-full p-4 rounded-2xl flex items-center justify-between border border-gray-800 hover:border-emerald-500/50 hover:bg-gray-800/80 transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg">
+                <div class="flex items-center space-x-4">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg group-hover:bg-brand-accent group-hover:text-brand-dark transition-colors">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">1. Официальный сайт</div>
+                        <div class="text-xs text-gray-400">Промо-страница и заказ оборудования</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-400 text-xs transition-colors"></i>
+            </a>
+
+            <!-- 2. Приложение -->
+            <button onclick="openModal('Мобильное приложение', 'Интерактивный интерфейс управления IoT-шкафом для шеф-повара (Figma-прототип со статусом pH, воды и заказом картриджей).')" class="glass-card group w-full p-4 rounded-2xl flex items-center justify-between border border-gray-800 hover:border-emerald-500/50 hover:bg-gray-800/80 transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg">
+                <div class="flex items-center space-x-4">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg group-hover:bg-brand-accent group-hover:text-brand-dark transition-colors">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">2. Мобильное приложение</div>
+                        <div class="text-xs text-gray-400">Панель управления для шеф-повара</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-400 text-xs transition-colors"></i>
+            </button>
+
+            <!-- 3. Финансовые расчеты -->
+            <a href="financial_data_deck.html" target="_blank" class="glass-card group w-full p-4 rounded-2xl flex items-center justify-between border border-gray-800 hover:border-emerald-500/50 hover:bg-gray-800/80 transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg">
+                <div class="flex items-center space-x-4">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg group-hover:bg-brand-accent group-hover:text-brand-dark transition-colors">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">3. Финансовые расчеты</div>
+                        <div class="text-xs text-gray-400">P&L модель, NPV, ROI и окупаемость</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-400 text-xs transition-colors"></i>
+            </a>
+
+            <!-- 4. Описание и состав картриджей -->
+            <button onclick="openModal('Описание и состав картриджей', 'Состав семенных лотков: органо-минеральный субстрат из кокосового волокна, минеральная вата, калиброванные семена (базилик, руккола, мята) и гранулированный стартовый питательный комплекс.')" class="glass-card group w-full p-4 rounded-2xl flex items-center justify-between border border-gray-800 hover:border-emerald-500/50 hover:bg-gray-800/80 transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg">
+                <div class="flex items-center space-x-4">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg group-hover:bg-brand-accent group-hover:text-brand-dark transition-colors">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">4. Состав картриджей</div>
+                        <div class="text-xs text-gray-400">Каталог культур и био-субстрата</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-400 text-xs transition-colors"></i>
+            </button>
+
+            <!-- 5. Заведение для пилотного запуска -->
+            <button onclick="openModal('Заведение для пилотного запуска', 'Пилотная площадка в Санкт-Петербурге: Ресторан итальянской кухни Osteria. Тестирование 14 дней с фиксацией нуля списаний базилика.')" class="glass-card group w-full p-4 rounded-2xl flex items-center justify-between border border-gray-800 hover:border-emerald-500/50 hover:bg-gray-800/80 transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg">
+                <div class="flex items-center space-x-4">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg group-hover:bg-brand-accent group-hover:text-brand-dark transition-colors">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">5. Пилотный запуск</div>
+                        <div class="text-xs text-gray-400">Тестовая площадка в HoReCa</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-400 text-xs transition-colors"></i>
+            </button>
+
+            <!-- 6. Проект по собственной гидропонике -->
+            <button onclick="openModal('Проект собственной гидропоники', 'Техническая спецификация двухдверного шкафа 2000×900×600 мм: 4 яруса, контроллер STM32, помпы дозации pH/EC, LED Samsung High-PPE.')" class="glass-card group w-full p-4 rounded-2xl flex items-center justify-between border border-gray-800 hover:border-emerald-500/50 hover:bg-gray-800/80 transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg">
+                <div class="flex items-center space-x-4">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg group-hover:bg-brand-accent group-hover:text-brand-dark transition-colors">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">6. Своя гидропоника</div>
+                        <div class="text-xs text-gray-400">Архитектура оборудования и IoT</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-400 text-xs transition-colors"></i>
+            </button>
+
+        </div>
+    </main>
+
+    <!-- Modal for Info Popups -->
+    <div id="info-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="rounded-3xl glass-card p-6 max-w-sm w-full border border-emerald-500/40 text-center space-y-4 transform scale-95 transition-transform duration-300">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 text-2xl mx-auto flex items-center justify-center border border-emerald-500/30">
+                <i id="modal-icon" class="fa-solid fa-circle-info"></i>
+            </div>
+            <h3 id="modal-title" class="text-xl font-bold text-white"></h3>
+            <p id="modal-desc" class="text-xs text-gray-300 leading-relaxed"></p>
+            <button onclick="closeModal()" class="w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider bg-brand-accent text-brand-dark hover:bg-brand-accentHover transition-colors">
+                Понятно
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-[11px] text-gray-500 border-t border-gray-900 relative z-10">
+        UrbanSprout • Всероссийский кейс-чемпионат «Ключ» 2026/2027
+    </footer>
+
+    <script>
+        function openModal(title, desc) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+            
+            const modal = document.getElementById('info-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.querySelector('div').classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('info-modal');
+            modal.classList.add('opacity-0');
+            modal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+</body>
+</html>
