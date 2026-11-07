@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanSprout — Умные гидропонные IoT-шкафы и био-картриджи для ресторанов</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#111827',
+                            card: '#1F2937',
+                            border: '#374151',
+                            accent: '#10B981',
+                            accentHover: '#059669',
+                            lightBg: '#F9FAFB',
+                            textMuted: '#9CA3AF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B0F17;
+            color: #F3F4F6;
+        }
+        .glow-accent {
+            box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.3);
+        }
+        .glow-accent-lg {
+            box-shadow: 0 0 50px -10px rgba(16, 185, 129, 0.25);
+        }
+        .glass-panel {
+            background: rgba(31, 41, 55, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-accent selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-brand-accent flex items-center justify-center text-brand-dark font-bold text-xl transition-transform group-hover:scale-105 shadow-lg shadow-emerald-900/40">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-extrabold tracking-tight text-white flex items-center gap-1.5">
+                        UrbanSprout <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-medium border border-emerald-500/30">IoT</span>
+                    </span>
+                    <span class="text-[10px] text-gray-400 font-medium tracking-wider uppercase">Fresh Tech for HoReCa</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
+                <a href="#product" class="hover:text-brand-accent transition-colors">IoT-Шкаф Grand Pro</a>
+                <a href="#tech" class="hover:text-brand-accent transition-colors">Технологии</a>
+                <a href="#store" class="hover:text-brand-accent transition-colors">Магазин картриджей</a>
+                <a href="#calculator" class="hover:text-brand-accent transition-colors">Калькулятор выгоды</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center space-x-4">
+                <a href="#order" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-xl font-semibold text-sm bg-brand-accent text-brand-dark hover:bg-brand-accentHover transition-all transform hover:-translate-y-0.5 shadow-lg shadow-emerald-500/20">
+                    Купить шкаф
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white p-2">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-gray-800 px-4 py-6 space-y-4">
+            <a href="#product" class="block text-gray-300 hover:text-brand-accent font-medium py-1">IoT-Шкаф Grand Pro</a>
+            <a href="#tech" class="block text-gray-300 hover:text-brand-accent font-medium py-1">Технологии</a>
+            <a href="#store" class="block text-gray-300 hover:text-brand-accent font-medium py-1">Магазин картриджей</a>
+            <a href="#calculator" class="block text-gray-300 hover:text-brand-accent font-medium py-1">Калькулятор выгоды</a>
+            <a href="#order" class="block w-full text-center px-5 py-3 rounded-xl font-semibold bg-brand-accent text-brand-dark">Купить шкаф</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Text -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Прямая покупка и био-картриджи под ключ
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15]">
+                        Свежая зелень прямо в зале вашего <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500">ресторана</span>
+                    </h1>
+                    
+                    <p class="text-lg text-gray-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Премиальный автономный гидропонный IoT-шкаф UrbanSprout Grand Pro. Выращивайте свежий базилик, рукколу и пряные травы с помощью смарт-картриджей. <strong class="text-white">0% списаний</strong> и закупка свежей продукции прямо на глазах у клиентов.
+                    </p>
+
+                    <!-- Key Bullets -->
+                    <div class="grid grid-cols-3 gap-4 pt-2 max-w-lg mx-auto lg:mx-0">
+                        <div class="p-3 rounded-xl glass-panel text-center lg:text-left">
+                            <div class="text-xl sm:text-2xl font-bold text-emerald-400">0%</div>
+                            <div class="text-xs text-gray-400">Списаний и брака</div>
+                        </div>
+                        <div class="p-3 rounded-xl glass-panel text-center lg:text-left">
+                            <div class="text-xl sm:text-2xl font-bold text-emerald-400">160 000 ₽</div>
+                            <div class="text-xs text-gray-400">Полная стоимость</div>
+                        </div>
+                        <div class="p-3 rounded-xl glass-panel text-center lg:text-left">
+                            <div class="text-xl sm:text-2xl font-bold text-emerald-400">100%</div>
+                            <div class="text-xs text-gray-400">IoT-автоматика</div>
+                        </div>
+                    </div>
+
+                    <!-- Call To Action Buttons -->
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#order" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-base bg-brand-accent text-brand-dark hover:bg-brand-accentHover transition-all shadow-xl shadow-emerald-500/20 transform hover:-translate-y-0.5 text-center">
+                            <i class="fa-solid fa-cart-shopping mr-2"></i>Заказать UrbanSprout Grand Pro
+                        </a>
+                        <a href="#store" class="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold text-base glass-panel text-white hover:bg-gray-800 transition-all border border-gray-700 text-center">
+                            Каталог картриджей
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Image Showcase -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-emerald-500 to-teal-600 opacity-30 blur-2xl"></div>
+                        <div class="relative rounded-2xl glass-panel p-4 border border-gray-700 glow-accent">
+                            <img src="photo_5363801935640732346_w.jpg" alt="UrbanSprout Grand Pro IoT-шкаф" class="w-full h-auto rounded-xl object-cover shadow-2xl">
+                            
+                            <!-- Floating Badge -->
+                            <div class="absolute bottom-8 right-8 glass-panel p-3 sm:p-4 rounded-xl border border-emerald-500/40 shadow-xl flex items-center space-x-3 bg-brand-dark/90">
+                                <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
+                                <div>
+                                    <div class="text-xs font-semibold text-white">Датчики pH, EC & Воды</div>
+                                    <div class="text-[11px] text-emerald-400 font-medium">Автоматическая дозация солей</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Product Showcase Section -->
+    <section id="product" class="py-20 bg-gray-950/60 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2">Оборудование</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Гидропонный IoT-Шкаф UrbanSprout Grand Pro</h3>
+                <p class="mt-4 text-gray-400 text-base">Флагманский двухдверный гидропонный комплекс для залов ресторанов, отелей и премиальных супермаркетов.</p>
+            </div>
+
+            <div class="rounded-3xl glass-panel border border-emerald-500/40 p-6 sm:p-12 relative glow-accent">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    
+                    <!-- Interactive Gallery -->
+                    <div class="lg:col-span-6 space-y-4">
+                        <div class="h-[420px] flex items-center justify-center overflow-hidden rounded-2xl bg-gray-900/80 p-6 border border-gray-800">
+                            <img id="grand-product-img" src="photo_5363801935640732346_w.jpg" alt="UrbanSprout Grand Pro" class="max-h-full w-auto object-contain transition-all duration-300">
+                        </div>
+                        <div class="flex justify-center space-x-3">
+                            <button onclick="setProductImg('photo_5363801935640732346_w.jpg', this)" class="px-4 py-2 text-xs rounded-xl bg-emerald-500 text-brand-dark font-bold transition-all shadow">Перспектива 3/4</button>
+                            <button onclick="setProductImg('photo_5363801935640732347_w.jpg', this)" class="px-4 py-2 text-xs rounded-xl bg-gray-800 text-gray-300 hover:text-white transition-all">Вид спереди</button>
+                        </div>
+                    </div>
+
+                    <!-- Specifications & Purchase Info -->
+                    <div class="lg:col-span-6 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 text-xs font-semibold">
+                            <i class="fa-solid fa-display"></i> Сенсорный дисплей 10.1"
+                        </div>
+
+                        <h3 class="text-3xl font-bold text-white">UrbanSprout Grand Pro</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Полностью автоматизированный комплекс выращивания с двухдверным фасадом из закаленного тонированного стекла. Исключает человеческий фактор: встроенная микропроцессорная система под управлением IoT анализирует солевой состав и кислотность раствора, подавая питательные вещества с высокой точностью.
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-4 pt-2">
+                            <div class="p-3.5 rounded-xl bg-gray-900/60 border border-gray-800">
+                                <div class="text-xs text-gray-400">Урожайность</div>
+                                <div class="text-lg font-bold text-emerald-400">до 15 кг / мес</div>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-gray-900/60 border border-gray-800">
+                                <div class="text-xs text-gray-400">Габариты</div>
+                                <div class="text-lg font-bold text-white">2000×900×600 мм</div>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-gray-900/60 border border-gray-800">
+                                <div class="text-xs text-gray-400">Ярусы выращивания</div>
+                                <div class="text-lg font-bold text-white">4 независимых уровня</div>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-gray-900/60 border border-gray-800">
+                                <div class="text-xs text-gray-400">Питание & Энергия</div>
+                                <div class="text-lg font-bold text-white">220V, ~180Вт/ч</div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div>
+                                <div class="text-xs text-gray-400">Стоимость оборудования:</div>
+                                <div class="text-3xl font-black text-emerald-400">160 000 ₽</div>
+                            </div>
+                            <a href="#order" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-sm bg-brand-accent text-brand-dark hover:bg-brand-accentHover transition-colors text-center shadow-lg shadow-emerald-500/20">
+                                Заказать с гарантией 2 года
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology & Innovations Section -->
+    <section id="tech" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2">Технологическое превосходство</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Инновации в каждом узле UrbanSprout</h3>
+                <p class="mt-4 text-gray-400 text-base">Шкаф спроектирован как автономное IoT-устройство. Шеф-повару не нужно быть агрономом — автоматика возьмет всё на себя.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Tech Card 1 -->
+                <div class="rounded-2xl glass-panel p-6 border border-gray-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-4">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">IoT-Датчики pH и EC</h4>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Двойной промышленный зонд pH и датчик электропроводности (EC) непрерывно измеряют уровень солей и кислотность раствора с точностью до 0.1 единицы.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-800 text-xs font-medium text-emerald-400">
+                        Точность pH: 5.5 - 6.5
+                    </div>
+                </div>
+
+                <!-- Tech Card 2 -->
+                <div class="rounded-2xl glass-panel p-6 border border-gray-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-4">
+                            <i class="fa-solid fa-flask-vial"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Автоматическая дозация</h4>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Перистальтические помпы впрыскивают точные микродозы концентратов удобрений (компоненты A и B) и pH-корректоров в 40-литровый бак.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-800 text-xs font-medium text-emerald-400">
+                        3 помпы микродозирования
+                    </div>
+                </div>
+
+                <!-- Tech Card 3 -->
+                <div class="rounded-2xl glass-panel p-6 border border-gray-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-4">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Мультиспектральный LED</h4>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Диоды Samsung High-PPE со смарт-режимами света: синий спектр для укоренения, глубокий красный ($660\text{ nm}$) для набора ароматной зеленой массы.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-800 text-xs font-medium text-emerald-400">
+                        Ускорение роста на +40%
+                    </div>
+                </div>
+
+                <!-- Tech Card 4 -->
+                <div class="rounded-2xl glass-panel p-6 border border-gray-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-4">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Мобильное приложение</h4>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Управление со смартфона: отслеживание готовности ярусов в %, уведомления о необходимости долива воды и перезаказ картриджей в 1 клик.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-800 text-xs font-medium text-emerald-400">
+                        iOS / Android / Web Dashboard
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Store of Cartridges and Seeds Section -->
+    <section id="store" class="py-20 bg-gray-950/80 relative border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2">Каталог расходных материалов</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Магазин картриджей и семян</h3>
+                <p class="mt-4 text-gray-400 text-base">Готовые био-картриджи на субстрате из кокосового волокна с калиброванными семенами. Установка в ярус занимает 2 минуты без грязи и земли.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Item 1 -->
+                <div class="rounded-2xl glass-panel border border-gray-800 p-6 flex flex-col justify-between hover:border-emerald-500/40 transition-all">
+                    <div>
+                        <div class="w-full h-44 rounded-xl bg-gray-900 overflow-hidden mb-4 flex items-center justify-center relative">
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-400 text-[11px] font-semibold border border-emerald-500/30">Срок прорастания: 12 дней</span>
+                            <i class="fa-solid fa-seedling text-6xl text-emerald-500/40"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Картридж "Базилик Зеленый Genovese"</h4>
+                        <p class="text-xs text-gray-400 mt-2">Классический итальянский крупнолистный базилик с высоким содержанием эфирных масел. Идеален для соуса песто и пиццы.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div class="text-xl font-black text-emerald-400">250 ₽ <span class="text-xs text-gray-500 font-normal">/ лоток</span></div>
+                        <button onclick="addToCart('Картридж Базилик Зеленый Genovese')" class="px-4 py-2 rounded-xl bg-brand-accent text-brand-dark hover:bg-brand-accentHover font-bold text-xs transition-colors">
+                            <i class="fa-solid fa-plus mr-1"></i>В корзину
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="rounded-2xl glass-panel border border-gray-800 p-6 flex flex-col justify-between hover:border-emerald-500/40 transition-all">
+                    <div>
+                        <div class="w-full h-44 rounded-xl bg-gray-900 overflow-hidden mb-4 flex items-center justify-center relative">
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-400 text-[11px] font-semibold border border-emerald-500/30">Срок прорастания: 14 дней</span>
+                            <i class="fa-solid fa-seedling text-6xl text-purple-500/40"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Картридж "Базилик Фиолетовый"</h4>
+                        <p class="text-xs text-gray-400 mt-2">Насыщенный темно-рубиновый цвет листьев и яркий пряный аромат. Отличный выбор для декорирования авторских блюд и напитков.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div class="text-xl font-black text-emerald-400">250 ₽ <span class="text-xs text-gray-500 font-normal">/ лоток</span></div>
+                        <button onclick="addToCart('Картридж Базилик Фиолетовый')" class="px-4 py-2 rounded-xl bg-brand-accent text-brand-dark hover:bg-brand-accentHover font-bold text-xs transition-colors">
+                            <i class="fa-solid fa-plus mr-1"></i>В корзину
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="rounded-2xl glass-panel border border-gray-800 p-6 flex flex-col justify-between hover:border-emerald-500/40 transition-all">
+                    <div>
+                        <div class="w-full h-44 rounded-xl bg-gray-900 overflow-hidden mb-4 flex items-center justify-center relative">
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-400 text-[11px] font-semibold border border-emerald-500/30">Срок прорастания: 10 дней</span>
+                            <i class="fa-solid fa-seedling text-6xl text-teal-500/40"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Картридж "Руккола Дикая"</h4>
+                        <p class="text-xs text-gray-400 mt-2">Пряно-острый ореховый вкус. Растет быстрыми темпами, обеспечивая непрерывную срезку для салатов и мясных блюд.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div class="text-xl font-black text-emerald-400">220 ₽ <span class="text-xs text-gray-500 font-normal">/ лоток</span></div>
+                        <button onclick="addToCart('Картридж Руккола Дикая')" class="px-4 py-2 rounded-xl bg-brand-accent text-brand-dark hover:bg-brand-accentHover font-bold text-xs transition-colors">
+                            <i class="fa-solid fa-plus mr-1"></i>В корзину
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="rounded-2xl glass-panel border border-gray-800 p-6 flex flex-col justify-between hover:border-emerald-500/40 transition-all">
+                    <div>
+                        <div class="w-full h-44 rounded-xl bg-gray-900 overflow-hidden mb-4 flex items-center justify-center relative">
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-400 text-[11px] font-semibold border border-emerald-500/30">Срок прорастания: 16 дней</span>
+                            <i class="fa-solid fa-seedling text-6xl text-emerald-400/40"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Картридж "Мята Перечная"</h4>
+                        <p class="text-xs text-gray-400 mt-2">Высокая ментоловая свежесть. Разработана для лимонадов, коктейлей и десертов барной карты вашего заведения.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div class="text-xl font-black text-emerald-400">280 ₽ <span class="text-xs text-gray-500 font-normal">/ лоток</span></div>
+                        <button onclick="addToCart('Картридж Мята Перечная')" class="px-4 py-2 rounded-xl bg-brand-accent text-brand-dark hover:bg-brand-accentHover font-bold text-xs transition-colors">
+                            <i class="fa-solid fa-plus mr-1"></i>В корзину
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="rounded-2xl glass-panel border border-gray-800 p-6 flex flex-col justify-between hover:border-emerald-500/40 transition-all">
+                    <div>
+                        <div class="w-full h-44 rounded-xl bg-gray-900 overflow-hidden mb-4 flex items-center justify-center relative">
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-400 text-[11px] font-semibold border border-emerald-500/30">Срок прорастания: 18 дней</span>
+                            <i class="fa-solid fa-seedling text-6xl text-emerald-600/40"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Картридж "Тархун (Эстрагон)"</h4>
+                        <p class="text-xs text-gray-400 mt-2">Ароматная культура с характерным анисовым оттенком. Идеально дополняет соусы и горячие блюда из птицы и рыбы.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div class="text-xl font-black text-emerald-400">300 ₽ <span class="text-xs text-gray-500 font-normal">/ лоток</span></div>
+                        <button onclick="addToCart('Картридж Тархун (Эстрагон)')" class="px-4 py-2 rounded-xl bg-brand-accent text-brand-dark hover:bg-brand-accentHover font-bold text-xs transition-colors">
+                            <i class="fa-solid fa-plus mr-1"></i>В корзину
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="rounded-2xl glass-panel border border-gray-800 p-6 flex flex-col justify-between hover:border-emerald-500/40 transition-all">
+                    <div>
+                        <div class="w-full h-44 rounded-xl bg-gray-900 overflow-hidden mb-4 flex items-center justify-center relative">
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-400 text-[11px] font-semibold border border-emerald-500/30">Срок прорастания: 7 дней</span>
+                            <i class="fa-solid fa-seedling text-6xl text-lime-500/40"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Микс Микрозелени (4 в 1)</h4>
+                        <p class="text-xs text-gray-400 mt-2">Специальный сет: подсолнечник, горох, редис Red Coral и горчица. Максимальная концентрация витаминов и ультра-быстрый рост.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-800 flex items-center justify-between">
+                        <div class="text-xl font-black text-emerald-400">200 ₽ <span class="text-xs text-gray-500 font-normal">/ лоток</span></div>
+                        <button onclick="addToCart('Микс Микрозелени (4 в 1)')" class="px-4 py-2 rounded-xl bg-brand-accent text-brand-dark hover:bg-brand-accentHover font-bold text-xs transition-colors">
+                            <i class="fa-solid fa-plus mr-1"></i>В корзину
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Cart Floating Bar -->
+            <div id="cart-bar" class="mt-10 p-4 rounded-2xl glass-panel border border-emerald-500/40 flex flex-col sm:flex-row items-center justify-between gap-4 hidden">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500 text-brand-dark font-bold flex items-center justify-center">
+                        <i class="fa-solid fa-basket-shopping"></i>
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold text-white" id="cart-summary">Выбрано картриджей: 0</div>
+                        <div class="text-xs text-gray-400">Готовы к оформлению заказа</div>
+                    </div>
+                </div>
+                <a href="#order" class="px-6 py-2.5 rounded-xl bg-brand-accent text-brand-dark font-bold text-xs uppercase tracking-wider hover:bg-brand-accentHover transition-colors">
+                    Оформить заказ на картриджи
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Calculator -->
+    <section id="calculator" class="py-20 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="rounded-3xl glass-panel p-8 sm:p-12 border border-emerald-500/30 glow-accent-lg">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Калькулятор окупаемости оборудования</span>
+                    <h3 class="text-3xl font-extrabold text-white mt-1">За сколько окупится UrbanSprout Grand Pro?</h3>
+                    <p class="text-sm text-gray-400 mt-2">Сравните расходы на постоянную покупку фасованной зелени у поставщиков с собственным производством в заведении.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <!-- Controls -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-semibold text-gray-200">Ежемесячная закупка зелени (кг):</label>
+                                <span id="volume-val" class="text-2xl font-black text-emerald-400">15 кг</span>
+                            </div>
+                            <input type="range" id="volume-range" min="5" max="30" value="15" step="1" 
+                                class="w-full h-3 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>5 кг (Кафе)</span>
+                                <span>15 кг (Ресторан)</span>
+                                <span>30 кг (Сеть / Отель)</span>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-gray-900/80 border border-gray-800 text-xs text-gray-400 space-y-2">
+                            <div class="flex justify-between">
+                                <span>Средняя закупка базилика/зелени у оптовика:</span>
+                                <span class="text-gray-200 font-medium">1 200 ₽ / кг</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Уровень списаний у оптовиков (порча в пути):</span>
+                                <span class="text-red-400 font-medium">25% от закупки</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Себестоимость выращивания на картриджах:</span>
+                                <span class="text-emerald-400 font-medium">~300 ₽ / кг</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Output Card -->
+                    <div class="lg:col-span-5">
+                        <div class="rounded-2xl bg-gradient-to-br from-emerald-950/80 to-gray-900 p-6 border border-emerald-500/40 text-center space-y-4">
+                            <div class="text-xs uppercase font-bold tracking-wider text-emerald-300">Расчет окупаемости</div>
+                            
+                            <div>
+                                <div class="text-xs text-gray-400">Экономия в месяц:</div>
+                                <div id="monthly-savings" class="text-3xl font-black text-emerald-400">18 000 ₽</div>
+                            </div>
+
+                            <div class="pt-3 border-t border-gray-800">
+                                <div class="text-xs text-gray-400">Срок окупаемости шкафа (160 000 ₽):</div>
+                                <div id="payback-period" class="text-3xl font-black text-white">~ 9 месяцев</div>
+                            </div>
+
+                            <a href="#order" class="block w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider bg-brand-accent text-brand-dark hover:bg-brand-accentHover transition-colors">
+                                Запросить коммерческое предложение
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Order / Lead Form -->
+    <section id="order" class="py-20 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="rounded-3xl glass-panel p-8 sm:p-12 border border-gray-700 shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <h3 class="text-3xl font-extrabold text-white">Оформить заказ оборудования</h3>
+                    <p class="text-sm text-gray-400 mt-2">Заполните форму для покупки гидропонного IoT-шкафа UrbanSprout Grand Pro или партии био-картриджей.</p>
+                </div>
+
+                <form id="lead-form" onsubmit="handleFormSubmit(event)" class="space-y-6 relative z-10">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Название заведения / компании *</label>
+                            <input type="text" required placeholder="например, Ресторан Osteria" 
+                                class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Имя управляющего / шеф-повара *</label>
+                            <input type="text" required placeholder="Александр" 
+                                class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 transition-colors">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Номер телефона *</label>
+                            <input type="tel" required placeholder="+7 (999) 000-00-00" 
+                                class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Предмет заказа</label>
+                            <select id="order-item-select" class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-emerald-500 transition-colors">
+                                <option value="UrbanSprout Grand Pro">IoT-Шкаф UrbanSprout Grand Pro (160 000 ₽)</option>
+                                <option value="Партия Картриджей">Партия семенных картриджей</option>
+                                <option value="Комплект Шкаф + Картриджи">Комплект Шкаф + Стартовый набор картриджей</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Комментарий к заказу или выбранные картриджи</label>
+                        <textarea id="order-notes" rows="3" placeholder="Укажите адрес доставки или перечень необходимых семенных картриджей..." 
+                            class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 transition-colors"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl font-bold text-base bg-brand-accent text-brand-dark hover:bg-brand-accentHover transition-all shadow-xl shadow-emerald-500/20 transform hover:-translate-y-0.5">
+                        Отправить заявку на покупку
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Success Notification -->
+    <div id="modal-success" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="rounded-3xl glass-panel p-8 max-w-md w-full border border-emerald-500/50 text-center space-y-4 transform scale-95 transition-transform duration-300">
+            <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 text-3xl mx-auto flex items-center justify-center border border-emerald-500/40">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h4 class="text-2xl font-bold text-white">Заявка успешно принята!</h4>
+            <p class="text-sm text-gray-300">Спасибо за обращение. Наш менеджер свяжется с вами в течение 15 минут для подтверждения заказа и условий поставки.</p>
+            <button onclick="closeModal()" class="w-full py-3 rounded-xl font-bold text-sm bg-brand-accent text-brand-dark hover:bg-brand-accentHover transition-colors mt-2">
+                Закрыть
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-12 bg-gray-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-accent flex items-center justify-center text-brand-dark font-bold text-lg">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <span class="text-lg font-bold text-white">UrbanSprout</span>
+            </div>
+
+            <div class="text-xs text-gray-500 text-center md:text-left">
+                Проект разработан в рамках Всероссийского кейс-чемпионата «Ключ». Категория РСХБ: Вертикальные фермы / IoT.
+            </div>
+
+            <div class="text-xs text-gray-400 font-medium">
+                © 2026 UrbanSprout Technologies Inc.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Image Switcher for Main Product
+        function setProductImg(src, btn) {
+            document.getElementById('grand-product-img').src = src;
+            const buttons = btn.parentElement.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.className = "px-4 py-2 text-xs rounded-xl bg-gray-800 text-gray-300 hover:text-white transition-all";
+            });
+            btn.className = "px-4 py-2 text-xs rounded-xl bg-emerald-500 text-brand-dark font-bold transition-all shadow";
+        }
+
+        // Cart Management
+        let cart = [];
+        function addToCart(itemName) {
+            cart.push(itemName);
+            const cartBar = document.getElementById('cart-bar');
+            const cartSummary = document.getElementById('cart-summary');
+            const notes = document.getElementById('order-notes');
+
+            cartBar.classList.remove('hidden');
+            cartSummary.innerText = `Выбрано картриджей: ${cart.length} шт.`;
+            notes.value = `Выбранные картриджи: ${cart.join(', ')}`;
+        }
+
+        // Interactive Calculator Logic
+        const range = document.getElementById('volume-range');
+        const volumeVal = document.getElementById('volume-val');
+        const monthlySavings = document.getElementById('monthly-savings');
+        const paybackPeriod = document.getElementById('payback-period');
+
+        function updateCalculator() {
+            const volume = parseInt(range.value);
+            volumeVal.innerText = `${volume} кг`;
+
+            // Effective cost from wholesaler at 1200 rub/kg + 25% waste = 1500 rub/kg
+            const traditionalCost = volume * 1200 * 1.25;
+
+            // Growing cost with UrbanSprout cartridges (~300 RUB per kg)
+            const urbanSproutCost = volume * 300;
+
+            const monthlyVal = Math.max(0, Math.round(traditionalCost - urbanSproutCost));
+            const paybackMonths = Math.ceil(160000 / monthlyVal);
+
+            monthlySavings.innerText = `${monthlyVal.toLocaleString('ru-RU')} ₽`;
+            paybackPeriod.innerText = `~ ${paybackMonths} мес.`;
+        }
+
+        range.addEventListener('input', updateCalculator);
+        updateCalculator();
+
+        // Form Submit Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const modal = document.getElementById('modal-success');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.querySelector('div').classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal-success');
+            modal.classList.add('opacity-0');
+            modal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.getElementById('lead-form').reset();
+            }, 300);
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
