@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanSprout — Умные гидропонные IoT-шкафы для ресторанов и супермаркетов</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#111827',
+                            card: '#1F2937',
+                            border: '#374151',
+                            accent: '#10B981',
+                            accentHover: '#059669',
+                            lightBg: '#F9FAFB',
+                            textMuted: '#9CA3AF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B0F17;
+            color: #F3F4F6;
+        }
+        .glow-accent {
+            box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.3);
+        }
+        .glow-accent-lg {
+            box-shadow: 0 0 50px -10px rgba(16, 185, 129, 0.25);
+        }
+        .glass-panel {
+            background: rgba(31, 41, 55, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-accent selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-brand-accent flex items-center justify-center text-brand-dark font-bold text-xl transition-transform group-hover:scale-105 shadow-lg shadow-emerald-900/40">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-extrabold tracking-tight text-white flex items-center gap-1.5">
+                        UrbanSprout <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-medium border border-emerald-500/30">IoT</span>
+                    </span>
+                    <span class="text-[10px] text-gray-400 font-medium tracking-wider uppercase">Fresh Tech for HoReCa</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
+                <a href="#models" class="hover:text-brand-accent transition-colors">Модели шкафов</a>
+                <a href="#advantages" class="hover:text-brand-accent transition-colors">Преимущества</a>
+                <a href="#calculator" class="hover:text-brand-accent transition-colors">Калькулятор выгоды</a>
+                <a href="#tech" class="hover:text-brand-accent transition-colors">Технологии IoT</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center space-x-4">
+                <a href="#order" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-xl font-semibold text-sm bg-brand-accent text-brand-dark hover:bg-brand-accentHover transition-all transform hover:-translate-y-0.5 shadow-lg shadow-emerald-500/20">
+                    Оформить заявку
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white p-2">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-gray-800 px-4 py-6 space-y-4">
+            <a href="#models" class="block text-gray-300 hover:text-brand-accent font-medium py-1">Модели шкафов</a>
+            <a href="#advantages" class="block text-gray-300 hover:text-brand-accent font-medium py-1">Преимущества</a>
+            <a href="#calculator" class="block text-gray-300 hover:text-brand-accent font-medium py-1">Калькулятор выгоды</a>
+            <a href="#tech" class="block text-gray-300 hover:text-brand-accent font-medium py-1">Технологии IoT</a>
+            <a href="#order" class="block w-full text-center px-5 py-3 rounded-xl font-semibold bg-brand-accent text-brand-dark">Оформить заявку</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        <!-- Background Decorative Glows -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Text -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Модель подписки HaaS (Hardware-as-a-Service)
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15]">
+                        Свежая зелень прямо в зале вашего <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500">ресторана</span>
+                    </h1>
+                    
+                    <p class="text-lg text-gray-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Автономные гидропонные IoT-шкафы по подписке под ключ. Выращивайте премиальный базилик, рукколу и пряные травы за 1 минуту до подачи в блюдо. <strong class="text-white">0% списаний</strong> и сокращение затрат на закупку до <strong class="text-emerald-400">35%</strong>.
+                    </p>
+
+                    <!-- Key Bullets -->
+                    <div class="grid grid-cols-3 gap-4 pt-2 max-w-lg mx-auto lg:mx-0">
+                        <div class="p-3 rounded-xl glass-panel text-center lg:text-left">
+                            <div class="text-xl sm:text-2xl font-bold text-emerald-400">0%</div>
+                            <div class="text-xs text-gray-400">Списаний и брака</div>
+                        </div>
+                        <div class="p-3 rounded-xl glass-panel text-center lg:text-left">
+                            <div class="text-xl sm:text-2xl font-bold text-emerald-400">-35%</div>
+                            <div class="text-xs text-gray-400">Экономия бюджета</div>
+                        </div>
+                        <div class="p-3 rounded-xl glass-panel text-center lg:text-left">
+                            <div class="text-xl sm:text-2xl font-bold text-emerald-400">100%</div>
+                            <div class="text-xs text-gray-400">IoT-автоматика</div>
+                        </div>
+                    </div>
+
+                    <!-- Call To Action Buttons -->
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#calculator" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-base bg-brand-accent text-brand-dark hover:bg-brand-accentHover transition-all shadow-xl shadow-emerald-500/20 transform hover:-translate-y-0.5 text-center">
+                            <i class="fa-solid fa-calculator mr-2"></i>Рассчитать экономию
+                        </a>
+                        <a href="#order" class="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold text-base glass-panel text-white hover:bg-gray-800 transition-all border border-gray-700 text-center">
+                            Тест на 14 дней
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Image Showcase -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-emerald-500 to-teal-600 opacity-30 blur-2xl"></div>
+                        <div class="relative rounded-2xl glass-panel p-4 border border-gray-700 glow-accent">
+                            <img src="photo_5363801935640732346_w.jpg" alt="UrbanSprout Grand IoT-шкаф" class="w-full h-auto rounded-xl object-cover shadow-2xl">
+                            
+                            <!-- Floating Badge -->
+                            <div class="absolute bottom-8 right-8 glass-panel p-3 sm:p-4 rounded-xl border border-emerald-500/40 shadow-xl flex items-center space-x-3 bg-brand-dark/90">
+                                <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
+                                <div>
+                                    <div class="text-xs font-semibold text-white">Мониторинг pH & EC</div>
+                                    <div class="text-[11px] text-emerald-400 font-medium">Автодозация включена</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section / Models -->
+    <section id="models" class="py-20 bg-gray-950/60 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2">Каталог оборудования</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Умные шкафы для любого масштаба HoReCa</h3>
+                <p class="mt-4 text-gray-400 text-base">Выберите модель по подписке HaaS с полным техническим обслуживанием и регулярным завозом семенных картриджей.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+
+                <!-- Card 1: Compact -->
+                <div class="rounded-2xl glass-panel border border-gray-800 p-6 sm:p-8 flex flex-col justify-between hover:border-emerald-500/50 transition-all duration-300 group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gray-800 text-gray-300 border border-gray-700">Для кафе, баров и небольших кухонь</span>
+                            <span class="text-xs font-semibold text-emerald-400 flex items-center gap-1"><i class="fa-solid fa-bolt"></i> 1-фазное 220V</span>
+                        </div>
+                        
+                        <div class="h-80 my-4 flex items-center justify-center overflow-hidden rounded-xl bg-gray-900/50 p-4">
+                            <img src="photo_5363801935640732348_w.jpg" alt="UrbanSprout Compact" class="max-h-full w-auto object-contain transition-transform duration-500 group-hover:scale-105">
+                        </div>
+
+                        <h4 class="text-2xl font-bold text-white mt-4">UrbanSprout Compact</h4>
+                        <p class="text-sm text-gray-400 mt-2">Компактный однодверный гидропонный шкаф с полной автодозацией. Идеален для украшения блюд, барных трав и микрозелени.</p>
+
+                        <ul class="mt-6 space-y-3 text-sm text-gray-300">
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>Урожайность: <strong>до 6 кг свежей зелени в месяц</strong></span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>4 яруса выращивания (размеры: 2000×500×600 мм)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>IoT-контроллер pH/EC + автодозаторы солей</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>Мобильное приложение для шеф-повара</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div>
+                            <div class="text-2xl font-black text-white">12 000 ₽ <span class="text-xs font-normal text-gray-400">/ мес.</span></div>
+                            <div class="text-[11px] text-gray-400">или покупка: 110 000 ₽</div>
+                        </div>
+                        <a href="#order" onclick="selectModel('UrbanSprout Compact')" class="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-sm bg-brand-accent text-brand-dark hover:bg-brand-accentHover transition-colors text-center">
+                            Заказать подписку
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Grand / Pro -->
+                <div class="rounded-2xl glass-panel border border-emerald-500/40 p-6 sm:p-8 flex flex-col justify-between hover:border-emerald-500 transition-all duration-300 relative glow-accent group">
+                    <div class="absolute -top-3.5 right-8 px-4 py-1 rounded-full text-xs font-bold bg-emerald-500 text-brand-dark shadow-lg">
+                        ХИТ ПРОДАЖ HORECA
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-950/80 text-emerald-300 border border-emerald-500/30">Для ресторанов и премиум-супермаркетов</span>
+                            <span class="text-xs font-semibold text-emerald-400 flex items-center gap-1"><i class="fa-solid fa-display"></i> Touch-экран 10.1"</span>
+                        </div>
+
+                        <!-- Image Switcher Gallery -->
+                        <div class="h-80 my-4 flex items-center justify-center overflow-hidden rounded-xl bg-gray-900/50 p-4 relative">
+                            <img id="grand-img" src="photo_5363801935640732346_w.jpg" alt="UrbanSprout Grand" class="max-h-full w-auto object-contain transition-all duration-300">
+                            
+                            <!-- Gallery Toggles -->
+                            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2 bg-brand-dark/80 p-1.5 rounded-lg border border-gray-700">
+                                <button onclick="switchGrandImg('photo_5363801935640732346_w.jpg', this)" class="px-2.5 py-1 text-xs rounded bg-emerald-500 text-brand-dark font-semibold transition-all shadow">Вид 3/4</button>
+                                <button onclick="switchGrandImg('photo_5363801935640732347_w.jpg', this)" class="px-2.5 py-1 text-xs rounded text-gray-300 hover:text-white transition-all">Вид спереди</button>
+                            </div>
+                        </div>
+
+                        <h4 class="text-2xl font-bold text-white mt-4">UrbanSprout Grand / Pro</h4>
+                        <p class="text-sm text-gray-400 mt-2">Флагманский двухдверный шкаф-витрина с высоким визуальным маркетинговым эффектом для зала ресторана или торгового зала.</p>
+
+                        <ul class="mt-6 space-y-3 text-sm text-gray-300">
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>Урожайность: <strong>до 15 кг базилика/зелени в месяц</strong></span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>4 двойных яруса (размеры: 2000×900×600 мм)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>Интерактивный сенсорный экран 10.1" + QR для гостей</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>Полное сервисное ТО + завоз картриджей под ключ</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div>
+                            <div class="text-2xl font-black text-emerald-400">15 000 ₽ <span class="text-xs font-normal text-gray-400">/ мес.</span></div>
+                            <div class="text-[11px] text-gray-400">или покупка: 160 000 ₽</div>
+                        </div>
+                        <a href="#order" onclick="selectModel('UrbanSprout Grand / Pro')" class="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-sm bg-brand-accent text-brand-dark hover:bg-brand-accentHover transition-colors text-center shadow-lg shadow-emerald-500/20">
+                            Заказать подписку
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Calculator -->
+    <section id="calculator" class="py-20 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="rounded-3xl glass-panel p-8 sm:p-12 border border-emerald-500/30 glow-accent-lg">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Калькулятор окупаемости</span>
+                    <h3 class="text-3xl font-extrabold text-white mt-1">Сколько вы сэкономите с UrbanSprout?</h3>
+                    <p class="text-sm text-gray-400 mt-2">Сравните ваши текущие расходы на фасованную зелень у оптовиков с подпиской на IoT-шкаф.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <!-- Controls -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-semibold text-gray-200">Ежемесячная закупка зелени (кг):</label>
+                                <span id="volume-val" class="text-2xl font-black text-emerald-400">15 кг</span>
+                            </div>
+                            <input type="range" id="volume-range" min="5" max="30" value="15" step="1" 
+                                class="w-full h-3 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>5 кг (Кафе)</span>
+                                <span>15 кг (Ресторан)</span>
+                                <span>30 кг (Сеть / Отель)</span>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-gray-900/80 border border-gray-800 text-xs text-gray-400 space-y-2">
+                            <div class="flex justify-between">
+                                <span>Средняя закупка базилика/зелени у оптовика:</span>
+                                <span class="text-gray-200 font-medium">1 200 ₽ / кг</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Уровень списаний (увядание, брак в дороге):</span>
+                                <span class="text-red-400 font-medium">25% от закупки</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Стоимость подписки UrbanSprout (15 кг):</span>
+                                <span class="text-emerald-400 font-medium">15 000 ₽ / мес.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Output Card -->
+                    <div class="lg:col-span-5">
+                        <div class="rounded-2xl bg-gradient-to-br from-emerald-950/80 to-gray-900 p-6 border border-emerald-500/40 text-center space-y-4">
+                            <div class="text-xs uppercase font-bold tracking-wider text-emerald-300">Ваша чистая выгода</div>
+                            
+                            <div>
+                                <div class="text-xs text-gray-400">Экономия в месяц:</div>
+                                <div id="monthly-savings" class="text-3xl font-black text-emerald-400">9 000 ₽</div>
+                            </div>
+
+                            <div class="pt-3 border-t border-gray-800">
+                                <div class="text-xs text-gray-400">Экономия за год:</div>
+                                <div id="yearly-savings" class="text-4xl font-black text-white">108 000 ₽</div>
+                            </div>
+
+                            <a href="#order" class="block w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider bg-brand-accent text-brand-dark hover:bg-brand-accentHover transition-colors">
+                                Фиксировать тариф
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages & Tech -->
+    <section id="advantages" class="py-20 bg-gray-950/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2">Технологическое ядро</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Почему UrbanSprout эффективнее привычных поставок?</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="rounded-2xl glass-panel p-6 border border-gray-800 hover:border-emerald-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-4">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">IoT-автоматика pH/EC</h4>
+                    <p class="text-sm text-gray-400">Перистальтические помпы автоматически впрыскивают питательный раствор и корректоры без участия персонала.</p>
+                </div>
+
+                <div class="rounded-2xl glass-panel p-6 border border-gray-800 hover:border-emerald-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-4">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Мультиспектральный LED</h4>
+                    <p class="text-sm text-gray-400">Управляемый фито-спектр ускоряет вегетацию на 40% и повышает концентрацию эфирных масел в листьях.</p>
+                </div>
+
+                <div class="rounded-2xl glass-panel p-6 border border-gray-800 hover:border-emerald-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-4">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Приложение шеф-повара</h4>
+                    <p class="text-sm text-gray-400">Уведомления о готовности урожая в % и перезаказ семенных картриджей в один клик с доставкой.</p>
+                </div>
+
+                <div class="rounded-2xl glass-panel p-6 border border-gray-800 hover:border-emerald-500/40 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-4">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Zero Waste & Zero Miles</h4>
+                    <p class="text-sm text-gray-400">Нулевые потери при транспортировке. Ваше заведение получает знак экогогичности и статус «Farm to Table».</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Order / Lead Form -->
+    <section id="order" class="py-20 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="rounded-3xl glass-panel p-8 sm:p-12 border border-gray-700 shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <h3 class="text-3xl font-extrabold text-white">Оформить заявку на UrbanSprout</h3>
+                    <p class="text-sm text-gray-400 mt-2">Оставьте данные для расчета тест-драйва на 14 дней или бронирования подписки под ваше заведение.</p>
+                </div>
+
+                <form id="lead-form" onsubmit="handleFormSubmit(event)" class="space-y-6 relative z-10">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Название заведения / компании *</label>
+                            <input type="text" required placeholder="например, Ресторан Osteria" 
+                                class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Имя управляющего / шеф-повара *</label>
+                            <input type="text" required placeholder="Александр" 
+                                class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 transition-colors">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Номер телефона *</label>
+                            <input type="tel" required placeholder="+7 (999) 000-00-00" 
+                                class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-emerald-500 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Выберите модель шкафа</label>
+                            <select id="model-select" class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-emerald-500 transition-colors">
+                                <option value="UrbanSprout Grand / Pro">UrbanSprout Grand / Pro (15 000 ₽/мес)</option>
+                                <option value="UrbanSprout Compact">UrbanSprout Compact (12 000 ₽/мес)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Формат сотрудничества</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="flex items-center p-3 rounded-xl bg-gray-900 border border-gray-700 cursor-pointer hover:border-emerald-500 transition-colors">
+                                <input type="radio" name="format" value="haas" checked class="accent-emerald-500">
+                                <span class="ml-2 text-sm text-gray-200">Подписка HaaS (Аренда)</span>
+                            </label>
+                            <label class="flex items-center p-3 rounded-xl bg-gray-900 border border-gray-700 cursor-pointer hover:border-emerald-500 transition-colors">
+                                <input type="radio" name="format" value="buy" class="accent-emerald-500">
+                                <span class="ml-2 text-sm text-gray-200">Покупка оборудования</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl font-bold text-base bg-brand-accent text-brand-dark hover:bg-brand-accentHover transition-all shadow-xl shadow-emerald-500/20 transform hover:-translate-y-0.5">
+                        Отправить заявку на тест-драйв
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Success Notification -->
+    <div id="modal-success" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="rounded-3xl glass-panel p-8 max-w-md w-full border border-emerald-500/50 text-center space-y-4 transform scale-95 transition-transform duration-300">
+            <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 text-3xl mx-auto flex items-center justify-center border border-emerald-500/40">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h4 class="text-2xl font-bold text-white">Заявка успешно принята!</h4>
+            <p class="text-sm text-gray-300">Спасибо за интерес к UrbanSprout. Наш сервисный инженер свяжется с вами в течение 15 минут для уточнения параметров заведения.</p>
+            <button onclick="closeModal()" class="w-full py-3 rounded-xl font-bold text-sm bg-brand-accent text-brand-dark hover:bg-brand-accentHover transition-colors mt-2">
+                Понятно, закрыть
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-12 bg-gray-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-accent flex items-center justify-center text-brand-dark font-bold text-lg">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <span class="text-lg font-bold text-white">UrbanSprout</span>
+            </div>
+
+            <div class="text-xs text-gray-500 text-center md:text-left">
+                Проект разработан в рамках Всероссийского кейс-чемпионата «Ключ». Категория РСХБ: Вертикальные фермы / IoT.
+            </div>
+
+            <div class="text-xs text-gray-400 font-medium">
+                © 2026 UrbanSprout Technologies Inc.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Image Switcher for Grand Model
+        function switchGrandImg(src, btn) {
+            document.getElementById('grand-img').src = src;
+            const buttons = btn.parentElement.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.className = "px-2.5 py-1 text-xs rounded text-gray-300 hover:text-white transition-all";
+            });
+            btn.className = "px-2.5 py-1 text-xs rounded bg-emerald-500 text-brand-dark font-semibold transition-all shadow";
+        }
+
+        // Select Model in Form
+        function selectModel(modelName) {
+            const select = document.getElementById('model-select');
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value.includes(modelName)) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        // Interactive Calculator Logic
+        const range = document.getElementById('volume-range');
+        const volumeVal = document.getElementById('volume-val');
+        const monthlySavings = document.getElementById('monthly-savings');
+        const yearlySavings = document.getElementById('yearly-savings');
+
+        function updateCalculator() {
+            const volume = parseInt(range.value);
+            volumeVal.innerText = `${volume} кг`;
+
+            // Market price: 1200 rub/kg + 25% waste/shrinkage = 1500 rub effective per kg
+            const traditionalCost = volume * 1200 * 1.25;
+
+            // Subscription Cost (scaled linearly around 15 kg = 15,000 RUB)
+            const subscriptionCost = Math.round((volume / 15) * 15000);
+
+            const monthlyVal = Math.max(0, Math.round(traditionalCost - subscriptionCost));
+            const yearlyVal = monthlyVal * 12;
+
+            monthlySavings.innerText = `${monthlyVal.toLocaleString('ru-RU')} ₽`;
+            yearlySavings.innerText = `${yearlyVal.toLocaleString('ru-RU')} ₽`;
+        }
+
+        range.addEventListener('input', updateCalculator);
+        updateCalculator();
+
+        // Form Submit Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const modal = document.getElementById('modal-success');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.querySelector('div').classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal-success');
+            modal.classList.add('opacity-0');
+            modal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.getElementById('lead-form').reset();
+            }, 300);
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
